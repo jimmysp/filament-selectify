@@ -1,11 +1,14 @@
 @php
+use Filament\Support\Enums\GridDirection;
+
     $id = $getId();
     $statePath = $getStatePath();
     $isDisabled = $isDisabled();
     $options = $getOptions();
     $offColor = $getOffColor() ?? 'gray';
     $onColor = $getOnColor() ?? 'primary';
-    $gridDirection = $getGridDirection() ?? 'column';
+    $gridDirection = $getGridDirection();
+    $isInline = $isInline();
     $icons = $getIcons();
     $iconPosition = $getIconPosition();
     $iconSize = $getIconSize();
@@ -13,9 +16,10 @@
 <x-dynamic-component :component="$getFieldWrapperView()" :field="$field">
     <div
         @class([
-            'selectify-button-group-grid grid gap-3',
-            'grid-cols-1 md:grid-cols-2' => $gridDirection === 'row',
-            'sm:grid-flow-col sm:grid-rows-2' => $gridDirection === 'column',
+            'selectify-button-group-grid',
+            'fi-inline flex flex-row' => $isInline,
+            'grid gap-3 grid-cols-1 md:grid-cols-2' => $gridDirection === GridDirection::Row && !$isInline,
+            'grid gap-3 sm:grid-flow-col sm:grid-rows-2' => $gridDirection === GridDirection::Column && !$isInline,
         ])
         x-data="{
             state: $wire.{{ $applyStateBindingModifiers("entangle('{$statePath}')") }},

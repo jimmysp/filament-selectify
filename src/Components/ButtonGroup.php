@@ -7,6 +7,7 @@ use Filament\Forms\Components\Concerns\HasGridDirection;
 use Filament\Forms\Components\Concerns\HasOptions;
 use Filament\Forms\Components\Concerns\HasToggleColors;
 use Filament\Forms\Components\Field;
+use Filament\Schemas\Concerns\CanBeInline;
 use Filament\Support\Concerns\HasExtraAlpineAttributes;
 use Filament\Support\Enums\IconPosition;
 use Filament\Support\Enums\IconSize;
@@ -15,6 +16,7 @@ class ButtonGroup extends Field
 {
     use HasExtraAlpineAttributes;
     use HasGridDirection;
+    use CanBeInline;
     use HasOptions;
     use HasToggleColors;
 
